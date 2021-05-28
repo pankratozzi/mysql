@@ -1,0 +1,130 @@
+# select * from mysql.help_keyword order by help_keyword_id limit 100;
+
+MacBook-Pro-Pankratov:~ pankratov$ mysqldump --opt --where='1 order by help_keyword_id limit 100' mysql help_keyword > dumped.sql
+MacBook-Pro-Pankratov:~ pankratov$ mysql key_sql < dumped.sql
+MacBook-Pro-Pankratov:~ pankratov$ mysql
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 43
+Server version: 8.0.0-dmr MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use key_sql;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select * from help_keyword order by help_keyword_id;
++-----------------+----------------------+
+| help_keyword_id | name                 |
++-----------------+----------------------+
+|               0 | JOIN                 |
+|               1 | HOST                 |
+|               2 | SERIALIZABLE         |
+|               3 | AT                   |
+|               4 | SCHEDULE             |
+|               5 | RETURNS              |
+|               6 | MASTER_SSL_CA        |
+|               7 | NCHAR                |
+|               8 | ONLY                 |
+|               9 | ST_GEOMETRYN         |
+|              10 | ST_GEOMCOLLFROMWKB   |
+|              11 | WORK                 |
+|              12 | OPEN                 |
+|              13 | ST_INTERSECTS        |
+|              14 | ESCAPE               |
+|              15 | EVENTS               |
+|              16 | MONTH                |
+|              17 | PROFILES             |
+|              18 | DUPLICATE            |
+|              19 | ST_POINTN            |
+|              20 | REPLICATION          |
+|              21 | UNLOCK               |
+|              22 | STATS_PERSISTENT     |
+|              23 | INNODB               |
+|              24 | REPLICATE_REWRITE_DB |
+|              25 | YEAR_MONTH           |
+|              26 | PREPARE              |
+|              27 | LOCK                 |
+|              28 | INT4                 |
+|              29 | POLYGON              |
+|              30 | MINUTE               |
+|              31 | SEPARATOR            |
+|              32 | DELETE               |
+|              33 | JSON_SEARCH          |
+|              34 | ON                   |
+|              35 | CONNECTION           |
+|              36 | CLOSE                |
+|              37 | MASTER_SSL_CRLPATH   |
+|              38 | USE                  |
+|              39 | PRIVILEGES           |
+|              40 | SPATIAL              |
+|              41 | SQL_BUFFER_RESULT    |
+|              42 | SECURITY             |
+|              43 | AUTOEXTEND_SIZE      |
+|              44 | ST_STARTPOINT        |
+|              45 | ST_POLYGONFROMWKB    |
+|              46 | LEVEL                |
+|              47 | BINARY               |
+|              48 | CURRENT_USER         |
+|              49 | HOUR_MINUTE          |
+|              50 | UPDATE               |
+|              51 | PRESERVE             |
+|              52 | ST_SIMPLIFY          |
+|              53 | INTO                 |
+|              54 | SQL_AFTER_GTIDS      |
+|              55 | VARIABLE             |
+|              56 | ROLLBACK             |
+|              57 | TIMESTAMP            |
+|              58 | IMPORT               |
+|              59 | CHECKSUM             |
+|              60 | THEN                 |
+|              61 | ENGINES              |
+|              62 | HANDLER              |
+|              63 | DAY_SECOND           |
+|              64 | HELP_DATE            |
+|              65 | BOOLEAN              |
+|              66 | JSON_EXTRACT         |
+|              67 | MOD                  |
+|              68 | ST_GEOMETRYTYPE      |
+|              69 | CLASS_ORIGIN         |
+|              70 | ITERATE              |
+|              71 | DO                   |
+|              72 | DATE                 |
+|              73 | FULLTEXT             |
+|              74 | COMMENT              |
+|              75 | ST_ASTEXT            |
+|              76 | MASTER_CONNECT_RETRY |
+|              77 | JSON_TYPE            |
+|              78 | MASTER_LOG_FILE      |
+|              79 | PRECISION            |
+|              80 | REQUIRE              |
+|              81 | ST_ASWKT             |
+|              82 | LONG                 |
+|              83 | FORMAT               |
+|              84 | OPTION               |
+|              85 | REORGANIZE           |
+|              86 | ELSE                 |
+|              87 | STATS_AUTO_RECALC    |
+|              88 | FROM                 |
+|              89 | MULTIPOLYGON         |
+|              90 | LEFT                 |
+|              91 | ELSEIF               |
+|              92 | ST_ISCLOSED          |
+|              93 | COMPACT              |
+|              94 | DEC                  |
+|              95 | FOR                  |
+|              96 | WARNINGS             |
+|              97 | ST_LONGFROMGEOHASH   |
+|              98 | ST_LINESTRINGFROMWKB |
+|              99 | STRING               |
++-----------------+----------------------+
+100 rows in set (0,00 sec)
+
+mysql> 
