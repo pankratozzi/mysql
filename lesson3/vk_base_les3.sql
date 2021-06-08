@@ -365,13 +365,15 @@ US.email,
 US.phone, 
 MS.from_user_id, 
 MS.to_user_id, 
-MS.txt 
+MS.txt,
+IFNULL(MS.txt, 'OLD MSG') AS null_msg 
 from users US left join messages MS on 
-MS.created_at BETWEEN (CURRENT_TIMESTAMP() - interval 3 day) and CURRENT_TIMESTAMP() and
+MS.created_at BETWEEN (DATE(NOW()) - interval 15 YEAR) and DATE(NOW()) and
 US.id = MS.from_user_id 
 where 
 email regexp '^([a-z0-9_\.-]+\@[\da-z\.-]+\.[a-z\.]{2,6})$'
-order by US.email asc limit 0, 4;
+order by US.email asc limit 0, 40;
+
 
 select concat(substring(users.firstname, 1,1), '. ', users.lastname) as name, users.email, profiles.gender, 
 if (profiles.gender = 'x', 'transgender', profiles.gender) as cond
@@ -410,6 +412,7 @@ INSERT IGNORE INTO communities SELECT (vk.communities.id + 200), vk.communities.
 DELETE FROM communities WHERE id = 202;
 
 ### task 3 ###
+#update indices set jdx = case when idx = 10 then 5 when idx = 15 then 7 end where idx in (10, 15);
 
 UPDATE media_types 
 SET name = ELT(FIELD(id, 1, 2, 3, 4), 'image', 'audio', 'video', 'document') 
@@ -422,3 +425,15 @@ DELETE FROM friend_requests WHERE from_user_id = to_user_id;
 
 # планирую взять тему курсовой: база данных популярного стримингого сервиса (онлайн кинотеатра), например, NetFlix
 # но это неточно, не слишком оригинально :)
+
+select count(*) as total, substring(birthday, 1, 3) as decade 
+from profiles group by decade having total >= 2 order by total;
+
+select group_concat(firstname), substring(created_at, 1 ,3) as decade 
+	from users group by decade limit 10;
+	
+select group_concat(firstname order by id desc separator ' '), 
+substring(created_at, 1 ,3) as decade from users group by decade limit 10;
+
+
+select substring(created_at, 1, 3) as decade, count(*) from users group by decade with rollup;
