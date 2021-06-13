@@ -21,7 +21,7 @@ FROM users WHERE id IN (
 		request_type = @rt_id ) AND id IN (SELECT user_id FROM communities_users) ORDER BY lastname;
 
 SELECT name, admin_id 
-FROM communities AS c WHERE c.id IN (SELECT community_id FROM communities_users cu WHERE # CASE
+FROM communities AS c WHERE c.id IN (SELECT community_id FROM communities_users cu WHERE
 	cu.user_id IN (SELECT id FROM users u WHERE u.id BETWEEN 1 AND 10)) 
 	AND c.admin_id IN (SELECT id FROM users u WHERE id IN (
 	SELECT to_user_id FROM friend_requests WHERE from_user_id = 5 AND
@@ -36,7 +36,7 @@ SELECT DISTINCT GROUP_CONCAT(u.lastname), c.name AS name FROM users u JOIN commu
 
 SELECT c.name, c.admin_id, CONCAT(u.firstname, ' ', u.lastname) AS admin_friends_myuser
 FROM communities AS c JOIN users u ON c.admin_id = u.id  WHERE c.id IN 
-	(SELECT community_id FROM communities_users cu WHERE # CASE
+	(SELECT community_id FROM communities_users cu WHERE
 	cu.user_id IN (SELECT id FROM users u WHERE u.id BETWEEN 1 AND 10)) 
 	AND c.admin_id IN (SELECT id FROM users u WHERE id IN (
 	SELECT to_user_id FROM friend_requests WHERE from_user_id = 5 AND
@@ -143,7 +143,7 @@ SET gender = (
   WHERE users.id = profiles.user_id)
 WHERE users.birthday IS NULL;
 
-# вывод в виде списка друг-недруг и сколько сообщений по убыванию
+# вывод в виде списка друг-недруг и сколько сообщений по возрастанию
 SELECT id, TIMESTAMPDIFF(YEAR, birthday, NOW()) AS age, (SELECT COUNT(*) AS total FROM posts_likes 
 	WHERE like_type = 1 AND user_id = users.id GROUP BY like_type) AS COUNTED_LIKES 
 	FROM users GROUP BY id ORDER BY age LIMIT 10;
