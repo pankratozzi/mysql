@@ -151,7 +151,6 @@ SELECT id, TIMESTAMPDIFF(YEAR, birthday, NOW()) AS age, (SELECT COUNT(*) AS tota
 # общее количество лайков в одной ячейке
 SELECT COUNT(*) FROM posts_likes WHERE like_type = 1 AND user_id IN (
 	SELECT * FROM (SELECT id FROM users ORDER BY birthday DESC LIMIT 10) AS alias);
-
 # task 4 
 # Определить кто больше поставил лайков (всего) - мужчины или женщины?
 
@@ -195,12 +194,12 @@ GROUP BY id ORDER BY counts LIMIT 10;
 
 
 # решение через временные таблицы (дичь)
+USE vk;
 
-
-CREATE TABLE tbl1 (id INT, cnt INT);
-CREATE TABLE tbl2 (id INT, cnt INT);
-CREATE TABLE tbl3 (id INT, cnt INT);
-CREATE TABLE tbl4 (id INT, cnt INT);
+CREATE TEMPORARY TABLE tbl1 (id INT, cnt INT);
+CREATE TEMPORARY TABLE tbl2 (id INT, cnt INT);
+CREATE TEMPORARY TABLE tbl3 (id INT, cnt INT);
+CREATE TEMPORARY TABLE tbl4 (id INT, cnt INT);
 
 INSERT INTO tbl1  
 SELECT from_user_id AS user_id, COUNT(*) AS counted FROM messages AS msg GROUP BY from_user_id;
@@ -230,7 +229,7 @@ FROM users AS us
 	LEFT JOIN tbl4 ON us.id = tbl4.id
 		ORDER BY SUMM LIMIT 10;
 	
-DROP TABLE tbl1, tbl2, tbl3, tbl4;	
+-- DROP TABLE tbl1, tbl2, tbl3, tbl4;	
 	
 	
 	
