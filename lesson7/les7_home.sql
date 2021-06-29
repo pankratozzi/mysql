@@ -68,4 +68,3 @@ FROM flights ORDER BY id;
 SELECT f.id AS flight_no, c.name AS departure, c2.name AS arrival FROM flights AS f JOIN cities AS c ON f.`from` = c.label 
 	JOIN cities AS c2 ON f.`to` = c2.label ORDER BY flight_no;
 
-
